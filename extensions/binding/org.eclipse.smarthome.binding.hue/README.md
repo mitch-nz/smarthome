@@ -55,6 +55,9 @@ In the thing file, this looks e.g. like
 
 ```
 Bridge hue:bridge:1 [ ipAddress="192.168.0.64" ]
+
+// Alternatively use the ID of the hub, it will appear in the log via the auto discovery, using the ID will stop the auto discovery continually finding and adding the bridge to the Paper UI inbox
+Bridge hue:bridge:0017999908a6 [ ipAddress="192.168.0.64" ]
 ```
 
 A user to authenticate against the Hue bridge is automatically generated. Please note that the generated user name cannot be written automatically to the .thing file, and has to be set manually. The generated user name can be found in the log files after pressing the authentication button on the bridge.
@@ -69,6 +72,9 @@ Thus, all it needs for manual configuration is this single value like
 
 ```
 0210 bulb1 [ lightId="1" ]
+
+// Alternatively use just the number without the blub, this will stop the auto discovery continually finding and adding the blub to the Paper UI inbox
+0210 1 [ lightId="1" ]
 ```
 
 ## Channels
@@ -91,7 +97,7 @@ In this example **Bulb1** is a standard Philips HUE bulb (LCT001) which supports
 ### demo.things:
 
 ```
-Bridge hue:bridge:1 [ ipAddress="192.168.0.64" ] {
+Bridge hue:bridge:1 [ ipAddress="192.168.0.64", userName="qwertzuiopasdfghjklyxcvbnm1234" ] {
 	0210 bulb1 [ lightId="1" ]
 	0220 bulb2 [ lightId="2" ]
 }
@@ -112,6 +118,9 @@ Switch	Light1_Effect		{ channel="hue:0210:1:bulb1:effect" }
 Switch	Light2_Toggle		{ channel="hue:0220:1:bulb2:brightness" }
 Dimmer	Light2_Dimm		{ channel="hue:0220:1:bulb2:brightness" }
 Dimmer	Light2_ColorTemp	{ channel="hue:0220:1:bulb2:color_temperature" }
+
+// If using alternatively id method then the first item will look like this:u
+Switch	Light1_Toggle		{ channel="hue:0210:0017999908a6:1:color" }
 ```
 
 Note: The bridge ID is in this example **1** but can be different in each system.
